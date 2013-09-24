@@ -17,8 +17,11 @@ $Template dynUserLog,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%sou
 $Template dynMailLog,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/mail.log"
 $Template dynDebug,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/debug"
 $Template dynMessages,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/messages"
+$Template dynDrupal,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/drupal.log"
 
 # Rules
+if $syslogfacility-text == 'local0' then ?dynDrupal
+&~
 auth,authpriv.*         ?dynAuthLog
 *.*;auth,authpriv.none,mail.none,cron.none      -?dynSyslog
 cron.*              ?dynCronLog
@@ -26,6 +29,9 @@ daemon.*            -?dynDaemonLog
 kern.*              -?dynKernLog
 mail.*              -?dynMailLog
 user.*              -?dynUserLog
+*.=debug;\
+  auth,authpriv.none;\
+    news.none;mail.none  -?dynDebug
 *.=info;*.=notice;*.=warn;\
     auth.none,authpriv.none;\
     cron.none,daemon.none;\
