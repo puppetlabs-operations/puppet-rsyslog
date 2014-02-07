@@ -23,18 +23,16 @@ $Template dynDrupal,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%sour
 if $syslogfacility-text == 'local0' then ?dynDrupal
 &~
 auth,authpriv.*         ?dynAuthLog
-*.=info;*.=notice;*.=warn;\
-auth,authpriv.none;\
-cron,daemon.none;\
-mail,news.none      -?dynSyslog
+*.*;auth,authpriv.none,mail.none,cron.none      -?dynSyslog
 cron.*              ?dynCronLog
 daemon.*            -?dynDaemonLog
 kern.*              -?dynKernLog
 mail.*              -?dynMailLog
 user.*              -?dynUserLog
-*.=debug;\
-  auth,authpriv.none;\
-  news.none;mail.none     -?dynDebug
+*.=info;*.=notice;*.=warn;\
+    auth.none,authpriv.none;\
+    cron.none,daemon.none;\
+    mail.none,news.none     -?dynMessages
 <% else -%>
 # Template
 $Template dynAllMessages,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/messages"
