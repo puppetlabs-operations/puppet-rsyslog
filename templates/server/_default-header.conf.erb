@@ -6,6 +6,7 @@ $ModLoad imudp
 <% if scope.lookupvar('rsyslog::server::enable_tcp') -%>
 # Load TCP module
 $ModLoad imtcp
+$InputTCPMaxSessions 1000 # Maximum TCP sessions (default 200)
 <% end -%>
 
 <% if scope.lookupvar('rsyslog::server::high_precision_timestamps') == false -%>
