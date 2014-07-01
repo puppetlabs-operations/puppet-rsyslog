@@ -29,10 +29,6 @@ daemon.*            -?dynDaemonLog
 kern.*              -?dynKernLog
 mail.*              -?dynMailLog
 user.*              -?dynUserLog
-*.=info;*.=notice;*.=warn;\
-    auth.none,authpriv.none;\
-    cron.none,daemon.none;\
-    mail.none,news.none     -?dynMessages
 <% else -%>
 # Template
 $Template dynAllMessages,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/messages"
