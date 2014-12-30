@@ -37,14 +37,16 @@ class rsyslog::client (
   $ssl_ca         = undef,
 ) inherits rsyslog {
 
-  $content_real = $custom_config ? {
-    ''      => template("${module_name}/client.conf.erb"),
-    default => template($custom_config),
+  if $custom_config {
+    $content_real = template($custom_config)
+  }
+  else {
+    $content_real = template("${module_name}/client.conf.erb")
   }
 
   rsyslog::snippet {'client':
     ensure  => present,
     content => $content_real,
-  } 
+  }
 
 }
