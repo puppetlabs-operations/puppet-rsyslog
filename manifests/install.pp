@@ -25,7 +25,7 @@ class rsyslog::install {
 
   if $rsyslog::ssl != false {
     package { 'rsyslog-gnutls':
-      ensure => present
+      ensure => $rsyslog::package_status
     }
  }
 
