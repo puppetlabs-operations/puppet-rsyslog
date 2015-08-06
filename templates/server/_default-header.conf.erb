@@ -9,17 +9,17 @@ $ModLoad imtcp
 $InputTCPMaxSessions 1000 # Maximum TCP sessions (default 200)
 <% end -%>
 
-<% if scope.lookupvar('rsyslog::server::high_precision_timestamps') -%>
-#
-# Use high precision timestamp format.
-#
-$ActionFileDefaultTemplate RSYSLOG_FileFormat
-<% else -%>
+<% if scope.lookupvar('rsyslog::server::high_precision_timestamps') == false -%>
 #
 # Use traditional timestamp format.
 # To enable high precision timestamps, comment out the following line.
 #
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+<% else -%>
+#
+# Use high precision timestamp format.
+#
+$ActionFileDefaultTemplate RSYSLOG_FileFormat
 <% end -%>
 
 <% if scope.lookupvar('rsyslog::server::ssl') -%>
