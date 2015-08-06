@@ -28,6 +28,7 @@ $ActionSendStreamDriverAuthMode anon
 <% end -%>
 <% end -%>
 
+<% if scope.lookupvar('rsyslog::client::log_auth_local') or scope.lookupvar('rsyslog::client::log_local') -%>
 <% if scope.lookupvar('rsyslog::client::high_precision_timestamps') == false -%>
 # Use default format
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
@@ -45,6 +46,7 @@ auth,authpriv.*                 /var/log/auth.log
 <% elsif scope.lookupvar('rsyslog::log_style') == 'redhat' -%>
 # Log auth messages locally
 auth,authpriv.*                 /var/log/secure
+<% end -%>
 <% end -%>
 
 <% if scope.lookupvar('rsyslog::client::log_local') -%>
