@@ -46,7 +46,6 @@ auth,authpriv.*                 /var/log/auth.log
 # Log auth messages locally
 auth,authpriv.*                 /var/log/secure
 <% end -%>
-<% end -%>
 
 <% if scope.lookupvar('rsyslog::client::log_local') -%>
 <% if scope.lookupvar('rsyslog::log_style') == 'debian' -%>
