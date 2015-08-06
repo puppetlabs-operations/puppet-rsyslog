@@ -15,6 +15,11 @@ $InputTCPMaxSessions 1000 # Maximum TCP sessions (default 200)
 # To enable high precision timestamps, comment out the following line.
 #
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+<% else -%>
+#
+# Use high precision timestamp format.
+#
+$ActionFileDefaultTemplate RSYSLOG_FileFormat
 <% end -%>
 
 <% if scope.lookupvar('rsyslog::server::ssl') -%>

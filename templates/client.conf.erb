@@ -28,9 +28,13 @@ $ActionSendStreamDriverAuthMode anon
 <% end -%>
 <% end -%>
 
-<% if scope.lookupvar('rsyslog::client::log_auth_local') or scope.lookupvar('rsyslog::client::log_local') -%>
-# We log locally, restore to default format
+<% if scope.lookupvar('rsyslog::client::high_precision_timestamps') == false -%>
+# Use default format
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+<% else -%>
+# Use high precision timestamp format.
+$ActionFileDefaultTemplate RSYSLOG_FileFormat
+<% end -%>
 
 # Drupal stuff
 if $syslogfacility-text == 'local0' then /var/log/drupal.log
