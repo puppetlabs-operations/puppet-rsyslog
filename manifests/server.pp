@@ -38,6 +38,6 @@ class rsyslog::server (
 
   rsyslog::snippet {'server':
     ensure  => present,
-    content => $real_content,
+    content => template("${module_name}/server-default.conf.erb"),
   }
 }
