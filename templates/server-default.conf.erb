@@ -18,9 +18,11 @@ $Template dynMailLog,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%sou
 $Template dynDebug,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/debug"
 $Template dynMessages,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/messages"
 $Template dynDrupal,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/drupal.log"
+$Template dynBindUpdate,"<%= scope.lookupvar('rsyslog::server::server_dir') -%>%source:R,ERE,1,DFLT:([A-Za-z-]*)--end%/update-debug.log"
 
 # Rules
 if $syslogfacility-text == 'local0' then ?dynDrupal
+if $syslogtag == 'bindupdate' then ?dynBindUpdate
 &~
 auth,authpriv.*         ?dynAuthLog
 *.*;auth,authpriv.none,mail.none,cron.none      -?dynSyslog
