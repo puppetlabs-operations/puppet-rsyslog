@@ -1,0 +1,10 @@
+# File is managed by puppet
+
+<% case @osfamily -%>
+<% when 'Debian' -%>
+# Debian, Ubuntu
+RSYSLOGD_OPTIONS=""
+<% when 'RedHat' -%>
+# CentOS, RedHat, Fedora
+SYSLOGD_OPTIONS=""
+<% end -%>
