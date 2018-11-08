@@ -24,17 +24,18 @@
 #  class { 'rsyslog::client': }
 #
 class rsyslog::client (
-  $log_remote     = true,
-  $spool_size     = '1g',
-  $remote_type    = 'tcp',
-  $log_local      = false,
-  $log_auth_local = false,
-  $custom_config  = undef,
-  $custom_params  = undef,
-  $server         = 'log',
-  $port           = '514',
-  $ssl            = false,
-  $ssl_ca         = undef,
+  $log_remote      = true,
+  $spool_size      = '1g',
+  $remote_type     = 'tcp',
+  $log_local       = false,
+  $log_auth_local  = false,
+  $custom_config   = undef,
+  $custom_params   = undef,
+  $protocol_format = 'RSYSLOG_ForwardFormat',
+  $server          = 'log',
+  $port            = '514',
+  $ssl             = false,
+  $ssl_ca          = undef,
 ) inherits rsyslog {
 
   if $custom_config {
