@@ -32,9 +32,11 @@ $ActionSendStreamDriverAuthMode anon
 # We log locally, restore to default format
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 
+<% if scope.lookupvar('rsyslog::client::include_drupal') -%>
 # Drupal stuff
 if $syslogfacility-text == 'local0' then /var/log/drupal.log
 &~
+<% end -%>
 <% if scope.lookupvar('rsyslog::log_style') == 'debian' -%>
 # Log auth messages locally
 auth,authpriv.*                 /var/log/auth.log

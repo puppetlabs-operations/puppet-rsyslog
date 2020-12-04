@@ -16,6 +16,7 @@
 # [*port*]
 # [*ssl*]
 # [*ssl_ca*]
+# [*include_drupal*]
 #
 # === Variables
 #
@@ -35,6 +36,7 @@ class rsyslog::client (
   $port           = '514',
   $ssl            = false,
   $ssl_ca         = undef,
+  $include_drupal = true, # true for backwards compatibility reasons
 ) inherits rsyslog {
 
   if $custom_config {
