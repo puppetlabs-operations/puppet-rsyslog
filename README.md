@@ -29,6 +29,9 @@ Manage rsyslog client and server via Puppet
         custom_config  => undef,
         server         => 'log',
         port           => '514',
+        ssl            => false,
+        ssl_ca         => undef,
+        include_drupal => true,
     }
 ```
 
@@ -91,6 +94,9 @@ The following lists all the class parameters this module accepts.
     log_auth_local                      true,false          Just log auth facility locally. Defaults to false.
     custom_config                       STRING              Specify your own template to use for client config. Defaults to undef. Example usage: custom_config => 'rsyslog/my_config.erb
     server                              STRING              Rsyslog server to log to. Will be used in the client configuration file.
+    ssl                                 true,false
+    ssl_ca                              STRING
+    include_drupal                      true,false          Include a drupal.log file. Defaults to true for backwards compatibility reasons.
 
     RSYSLOG::DATABASE CLASS PARAMETERS  VALUES              DESCRIPTION
     -------------------------------------------------------------------
