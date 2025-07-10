@@ -42,6 +42,7 @@ class rsyslog::params {
       $pgsql_package_name     = 'rsyslog-pgsql'
       $package_status         = 'latest'
       $rsyslog_d              = '/etc/rsyslog.d/'
+      $purge_rsyslog_d        = false
       $rsyslog_conf           = '/etc/rsyslog.conf'
       $rsyslog_default        = '/etc/sysconfig/rsyslog'
       $run_user               = 'root'
@@ -63,6 +64,7 @@ class rsyslog::params {
       $pgsql_package_name     = 'sysutils/rsyslog5-pgsql'
       $package_status         = 'present'
       $rsyslog_d              = '/etc/syslog.d/'
+      $purge_rsyslog_d        = false
       $rsyslog_conf           = '/etc/syslog.conf'
       $rsyslog_default        = '/etc/defaults/syslogd'
       $run_user               = 'root'

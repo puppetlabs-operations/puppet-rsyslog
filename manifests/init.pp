@@ -31,8 +31,11 @@ class rsyslog (
   $service_name           = $rsyslog::params::service_name,
   $client_conf            = $rsyslog::params::client_conf,
   $server_conf            = $rsyslog::params::server_conf,
+  $ssl                    = false,  
 ) inherits rsyslog::params {
-  class { 'rsyslog::install': }
+  class { 'rsyslog::install': 
+    ssl                  => $ssl,
+  }
   class { 'rsyslog::config': }
   class { 'rsyslog::service': }
 }

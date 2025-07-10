@@ -10,7 +10,9 @@
 #
 #  class { 'rsyslog::install': }
 #
-class rsyslog::install {
+class rsyslog::install (
+  Boolean $ssl,
+) {
   if $rsyslog::rsyslog_package_name != false {
     package { $rsyslog::rsyslog_package_name:
       ensure => $rsyslog::package_status,
